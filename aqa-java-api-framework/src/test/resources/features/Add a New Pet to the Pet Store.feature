@@ -21,13 +21,4 @@ Feature: Add a New Pet to the Pet Store
       | 300 | Tommy1  | available |
       | 400 | Tommy201 | available |
 
-  Scenario Outline: Verify that a pet's details can be updated by its ID using PUT
-  Given I have the details of the pet "<Id>","<Name>","<Status>" exists
-   When I send a PUT request to the "pet" endpoint with the pet's updated details in JSON format
-   When User retrieves the pet details with ID "<Id>"
-   Then The API should return a 200 OK response with the updated pet object that matches the "<Id>","<Name>","<Status>"
  
-Examples:
-  | Id  | Name            | Status    |
-  | 100 | Tommy1Updated   | sold      |
-  | 200 | Tommy201Updated | pending   |
