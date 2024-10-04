@@ -16,14 +16,33 @@ public class PetStoreSteps {
     ObjectMapper mapper = new ObjectMapper();
     private Pet pet;
 
-   /* @Given("I have the necessary details of the pet")
-    public void i_have_the_necessary_details_of_the_pet() {
-        RestAssured.baseURI = BASE_URL;
-        pet = new Pet();
-        pet.setId(1);
-        pet.setName("Tommy");
-        pet.setStatus("available");
-    }*/
+   @Given("^I have the details of the pet "([^"]*)", "([^"]*)", "([^"]*)"$")
+    public void i_have_the_details_of_the_pet(String id, String name, String status) {
+        pet = new Pet(Integer.parseInt(id), name, status);
+    }
+
+    @When("^I send a PUT request to the "/pet" endpoint with the updated pet's details$")
+    public void i_send_a_put_request() throws JsonProcessingException {
+        APIRequest.createRequest("/pet", pet);
+        response = APIResponse.sendRequest(HttpMethod.PUT);
+    }
+
+    @Then("^the pet should be updated in the store's inventory$")
+    public void the_pet_should_be_updated() {
+        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertTrue(response.asString().contains(pet.getName()));
+    }
+
+    @When("^I send a DELETE request to the "/pet/([^"]*)" endpoint$")
+    public void i_send_a_delete_request(String petId) {
+        APIRequest.createRequest("/pet/" + petId, null);
+        response = APIResponse.sendRequest(HttpMethod.DELETE);
+    }
+
+    @Then("^the pet should be removed from the store's inventory$")
+    public void the_pet_should_be_removed() {
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
 
     @When("I send a POST request to the {string} endpoint with the pet's details in JSON format")
     public void i_send_a_post_request_to_the_endpoint_with_the_pet_s_details_in_json_format(String endpoint) throws JsonProcessingException {
