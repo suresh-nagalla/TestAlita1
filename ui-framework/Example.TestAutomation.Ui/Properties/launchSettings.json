@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ClaimsPay.TestAutomation.Ui": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

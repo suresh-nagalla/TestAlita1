@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ClaimsPay.TestAutomation.EscrowPayTests": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

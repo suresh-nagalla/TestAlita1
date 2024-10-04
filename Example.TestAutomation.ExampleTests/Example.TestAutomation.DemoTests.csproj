@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>da288b09-8feb-47c4-b316-45e6f380b7b2</UserSecretsId>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="35.5.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="SolidToken.SpecFlow.DependencyInjection" Version="3.9.3" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
+    <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
+    <PackageReference Include="nunit" Version="4.1.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ui-framework\Example.TestAutomation.Ui\Example.TestAutomation.Ui.csproj" />
+  </ItemGroup>
+
+ 
+
+  <ItemGroup>
+    <Content Update="C:\Users\Sreekanth_Gaddam\.nuget\packages\allure.specflow\2.12.0\contentFiles\any\netstandard2.0\allureConfig.Template.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="specflow.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup> 
+
+</Project>

@@ -1,0 +1,10 @@
+{
+  "alitacode.providerServerURL": "https://alita.lab.epam.com/",
+  "alitacode.modelName": "gpt-4-0125-preview",
+  "alitacode.authToken": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTQzZWM2YzAtNTZlNC00YjlmLTlkNzYtZDJiZTkyZDU4NjQzIiwiZXhwaXJlcyI6IjIwMjQtMTItMTZUMDQ6MzYifQ.Wrfws3-79eg-K2PLsZd9gSWfzfJo5hulKs_UP-gF9jwtgiu28MFigu3HBLsd0tFYsAEScuDr6YC5XVw3dLY7bA",
+  "alitacode.projectId": 1801,
+  "alitacode.integrationUid": "8a5c3de3-7b51-459f-bf56-f2ac8f0882a6",
+  "alitacode.defaultViewMode": "split",
+  "alitacode.verifySsl": false,
+  "java.configuration.updateBuildConfiguration": "interactive"
+}
