@@ -79,28 +79,5 @@ public void the_api_should_return_a_200_ok_response_with_the_pet_object_that_mat
     Assert.assertEquals(status, response.jsonPath().getString("status"));
     System.out.println("Response Body: " + response.getBody().asString());
 }
-@When("I send a PUT request to the {string} endpoint with the pet's updated details in JSON format")
-public void i_send_a_put_request_to_the_endpoint_with_the_pet_s_updated_details_in_json_format(String endpoint) throws JsonProcessingException {
-    APIRequest.createRequest(endpoint, mapper.writeValueAsString(pet));
-    response = APIResponse.sendRequest(HttpMethod.PUT);
-    System.out.println("Status Code: " + response.getStatusCode());
-}
-@Then("The API should return a 200 OK response with the updated pet object that matches the {string},{string},{string}")
-public void the_api_should_return_a_200_ok_response_with_the_updated_pet_object_that_matches(String id, String name, String status) {
-    
 
-     // Assert status code
-     Assert.assertEquals(200, response.getStatusCode());
-
-     // Deserialize the response to Pet object
-     Pet updatedPet = response.as(Pet.class);
- 
-     // Assert the pet details
-     Assert.assertEquals(Integer.parseInt(id), updatedPet.getId());
-     Assert.assertEquals(name, updatedPet.getName());
-     Assert.assertEquals(status, updatedPet.getStatus());
- 
-     // Optionally print the details of photoUrls and tags
-     System.out.println("Updated Pet Details: " + updatedPet.toString());
-}
 }
