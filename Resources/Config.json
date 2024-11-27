@@ -1,0 +1,12 @@
+﻿//{
+//  "Browser": "chrome",
+//  "BaseUrl": "https://www.gmail.com",
+//  "ScreenshotPath": "Screenshots/",
+//  "ApiBaseUrl": "https://petstore.swagger.io/v2"
+//}
+{
+  "GmailLoginUrl": "https://mail.google.com",
+  "Browser": "chrome",
+  "ApiBaseUrl": "https://petstore.swagger.io/v2/",
+  "Timeout": 30
+}
