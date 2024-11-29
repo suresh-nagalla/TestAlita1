@@ -10,6 +10,43 @@ namespace AutomationFramework.API.StepDefinitions
 {
     [Binding]
     public class PetStoreSteps
+{
+    [Given(@"I have an invalid pet ID")]
+    public void GivenIHaveAnInvalidPetID()
+    {
+        // Set invalid pet ID
+        ScenarioContext.Current["petId"] = "invalid-id";
+    }
+
+    [Given(@"I do not provide a pet ID")]
+    public void GivenIDoNotProvideAPetID()
+    {
+        // Do not set pet ID
+        ScenarioContext.Current["petId"] = null;
+    }
+
+    [When(@"I send a DELETE request to the PetStore API")]
+    public void WhenISendADELETERequestToThePetStoreAPI()
+    {
+        var petId = ScenarioContext.Current["petId"] as string;
+        var response = PetStoreApiClient.DeletePet(petId);
+        ScenarioContext.Current["response"] = response;
+    }
+
+    [Then(@"I should receive a 404 Not Found response")]
+    public void ThenIShouldReceiveA404NotFoundResponse()
+    {
+        var response = ScenarioContext.Current["response"] as IRestResponse;
+        Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Then(@"I should receive a 400 Bad Request response")]
+    public void ThenIShouldReceiveA400BadRequestResponse()
+    {
+        var response = ScenarioContext.Current["response"] as IRestResponse;
+        Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+}
     {
         private readonly PetBusinessLogic _petBusinessLogic;
         private RestResponse _response;
