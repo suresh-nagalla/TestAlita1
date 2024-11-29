@@ -1,5 +1,52 @@
 ﻿using BoDi;
 using TechTalk.SpecFlow;
+
+[Binding]
+public class PetStoreSteps
+{
+    private readonly ScenarioContext _scenarioContext;
+    private readonly PetStoreApiClient _petStoreApiClient;
+
+    public PetStoreSteps(ScenarioContext scenarioContext, PetStoreApiClient petStoreApiClient)
+    {
+        _scenarioContext = scenarioContext;
+        _petStoreApiClient = petStoreApiClient;
+    }
+
+    [Given("I have an invalid pet ID")]
+    public void GivenIHaveAnInvalidPetID()
+    {
+        _scenarioContext["petId"] = "invalid_id";
+    }
+
+    [Given("I do not provide a pet ID")]
+    public void GivenIDoNotProvideAPetID()
+    {
+        _scenarioContext["petId"] = null;
+    }
+
+    [When("I send a DELETE request to the PetStore API")]
+    public async Task WhenISendADELETERequestToThePetStoreAPI()
+    {
+        var petId = _scenarioContext["petId"]?.ToString();
+        var response = await _petStoreApiClient.DeletePetAsync(petId);
+        _scenarioContext["response"] = response;
+    }
+
+    [Then("I should receive a 404 Not Found response")]
+    public void ThenIShouldReceiveA404NotFoundResponse()
+    {
+        var response = _scenarioContext["response"] as RestResponse;
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Then("I should receive a 400 Bad Request response")]
+    public void ThenIShouldReceiveA400BadRequestResponse()
+    {
+        var response = _scenarioContext["response"] as RestResponse;
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+}
 using AutomationFramework.API.BusinessLogic;
 using AutomationFramework.Core.Config;
 using RestSharp;
