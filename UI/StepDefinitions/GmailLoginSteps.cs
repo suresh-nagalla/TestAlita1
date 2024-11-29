@@ -1,4 +1,41 @@
 ﻿using TechTalk.SpecFlow;
+
+[Binding]
+public class GmailLoginSteps
+{
+    private readonly ScenarioContext _scenarioContext;
+    private readonly GmailLoginPage _gmailLoginPage;
+
+    public GmailLoginSteps(ScenarioContext scenarioContext, GmailLoginPage gmailLoginPage)
+    {
+        _scenarioContext = scenarioContext;
+        _gmailLoginPage = gmailLoginPage;
+    }
+
+    [Given("I am on the Gmail login page")]
+    public void GivenIAmOnTheGmailLoginPage()
+    {
+        _gmailLoginPage.NavigateToLoginPage();
+    }
+
+    [When("I enter invalid credentials")]
+    public void WhenIEnterInvalidCredentials()
+    {
+        _gmailLoginPage.EnterCredentials("invalid_user", "invalid_password");
+    }
+
+    [When("I click the login button")]
+    public void WhenIClickTheLoginButton()
+    {
+        _gmailLoginPage.ClickLoginButton();
+    }
+
+    [Then("I should see an error message indicating invalid credentials")]
+    public void ThenIShouldSeeAnErrorMessageIndicatingInvalidCredentials()
+    {
+        _gmailLoginPage.VerifyInvalidLoginErrorMessage();
+    }
+}
 using AutomationFramework.UI.BusinessLogic;
 using AutomationFramework.Core.Config;
 using OpenQA.Selenium;
