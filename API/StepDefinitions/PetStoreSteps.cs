@@ -10,6 +10,45 @@ namespace AutomationFramework.API.StepDefinitions
 {
     [Binding]
     public class PetStoreSteps
+{
+    private readonly ScenarioContext _scenarioContext;
+    private readonly PetStoreApiClient _petStoreApiClient;
+    private readonly ILogger _logger;
+
+    public PetStoreSteps(ScenarioContext scenarioContext, PetStoreApiClient petStoreApiClient, ILogger logger)
+    {
+        _scenarioContext = scenarioContext;
+        _petStoreApiClient = petStoreApiClient;
+        _logger = logger;
+    }
+
+    [Given("I have an invalid pet ID")]
+    public void GivenIHaveAnInvalidPetID()
+    {
+        _scenarioContext["PetID"] = "invalid-id";
+    }
+
+    [Given("I have a non-existent pet ID")]
+    public void GivenIHaveANonExistentPetID()
+    {
+        _scenarioContext["PetID"] = "999999";
+    }
+
+    [When("I send a DELETE request to the PetStore API")]
+    public async Task WhenISendADELETERequestToThePetStoreAPI()
+    {
+        var petId = _scenarioContext["PetID"].ToString();
+        var response = await _petStoreApiClient.DeletePetAsync(petId);
+        _scenarioContext["Response"] = response;
+    }
+
+    [Then("I should receive a 404 Not Found response")]
+    public void ThenIShouldReceiveA404NotFoundResponse()
+    {
+        var response = _scenarioContext["Response"] as RestResponse;
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+}
     {
         private readonly PetBusinessLogic _petBusinessLogic;
         private RestResponse _response;
