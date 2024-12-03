@@ -28,6 +28,7 @@ namespace API.StepDefinitions
         public void GivenIHaveANonExistentPetID()
         {
             _scenarioContext["petId"] = 999999;
+            var x =;
         }
 
         [When("I send a DELETE request to the PetStore API")]
