@@ -1,0 +1,24 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+public class SeleniumTests
+{
+    private IWebDriver driver;
+
+    public void Initialize()
+    {
+        driver = new ChromeDriver();
+    }
+
+    public void TestLogin()
+    {
+        driver.Navigate().GoToUrl("https://example.com");
+        var loginButton = driver.FindElement(By.Id("login"));
+        loginButton.Click();
+    }
+
+    public void Cleanup()
+    {
+        driver.Quit();
+    }
+}
